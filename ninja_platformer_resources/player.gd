@@ -6,7 +6,13 @@ extends CharacterBody2D
 func _physics_process(delta: float) -> void:
 	var x_input = Input.get_axis("ui_left", "ui_right")
 	
+	if not is_on_floor():
+		velocity.y += 500 * delta
+	
 	velocity.x = x_input * 80
+	
+	if Input.is_action_just_pressed("ui_up"):
+		velocity.y = -200
 	
 	if x_input != 0:
 		animation_player_lower.play("run")
